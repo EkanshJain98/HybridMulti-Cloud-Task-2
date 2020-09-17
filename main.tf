@@ -146,14 +146,14 @@ resource "aws_s3_bucket" "b" {
 resource "null_resource" "cloning" {
 depends_on=[ aws_s3_bucket.b]
   provisioner "local-exec" {
-    command = "git clone https://github.com/technicalej/mytestingfile.git myimage123"
+    command = "git clone https://github.com/technicalej/mytestingfile.git myimage"
   }
 }
 //creating s3-bucket-object 
 resource "aws_s3_bucket_object" "object" {
   bucket = "my-bucket-ekushdguk-457989"
   key    = "spider_man.jpg"
-  source = "myimages/spider_man.jpg"
+  source = "myimage/spider_man.jpg"
   acl="public-read"
 depends_on= [aws_s3_bucket.b,null_resource.cloning]
 }
